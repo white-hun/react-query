@@ -19,3 +19,7 @@ export default App;
 
 // Query client를 사용하도록 App 전체적으로 우산을 씌워준다
 // 네트워크 통신을 하는 곳에서 useQuery를 사용
+
+// Devtool 사용법
+// import 한 후
+// 최하단에 <ReactQueryDevtools initialIsOpen={false} /> 작성
