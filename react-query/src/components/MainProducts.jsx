@@ -27,6 +27,8 @@ export default function MainProducts() {
   );
 }
 
+// useQueryClient()
 // 새로운 제품이 추가되었다고 가정하면
 // 화면상에 있는 데이터는 오래된 데이터이다
 // 그때 새로운 데이터가 업데이트되었으니까 오래된 데이터는 invalidate하게 해달라고 명령할 수 있다(해당 key에 한해서)
+// 모든 cache에 한해서 전부 invalidate 하고 싶다면 데이터 key하나만 작성하면 된다
