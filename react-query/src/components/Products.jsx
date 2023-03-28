@@ -6,7 +6,7 @@ export default function Products() {
   const {
     isLoading,
     error,
-    data: products,
+    data: products, // Data의 이름을 바꿔줄 수 있다
   } = useQuery(
     ["products", checked],
     async () => {
@@ -48,18 +48,24 @@ export default function Products() {
 // useQurey에 첫번째 인자로 cache를 위한 key를 전달해줘야한다 배열형태이다
 // 서로 밀접하게 연관된 여러가지의 key들을 전달할 수 있다
 // 내부적으로 key들을 이용하여 해쉬key를 만들고 이것을 이용해서 cache를 보관하고 cache에서 읽어와야하는지 네트워크에서 읽어와야하는지 관리한다
+
 // 두번째 인자는 함수
 // 데이터를 어디서 가져와야하는지에 대한 함수(네트워크에서 데이터를 받아오는 로직)
-// promise든 await로 네트워크에서 받아온 데이터를 반환
+// promise든 await로 네트워크에서 받아온 데이터를 반환(함수 를 async로 만들어야 한다)
 
 // 컴포넌트가 처음으로 mount되거나 내부적으로 상태가 변경되거나 prop이 변경되어서 rerender될 때
 // key가 동일하고 cache가 되어있다면 두번째 인자의 함수로 네트워크 통신을 통해 데이터를 받아오는 것이 아니라
-// 내부적으로 cache된 데이터를 사용한다
+// 최초의 네트워크 통신에서 메모리에 데이터가 cache되는데
+// 내부적으로 메모리에 존재하는 cache된 데이터를 사용한다
+
+// key가 배열인 이유는 세밀하게 key들의 조합을 만들 수 있기 때문이다
 
 // Important Default
 // useQuery나 useInfinitieQuery를 사용하면 cache된 데이터의 default는 stale이다(오래된 데이터라는 뜻)
 // 이것은 변경하기 위해서는 query를 global로 사용하거나 query별로 staleTime이라는 옵션을 정해주면 된다
 // 한번 네트워크상에서 받아온 데이터를 얼마동안 fresh로 간주할 건지 설정한다
+
+// stale query는 cache되어 있어서 요청이 오면 UI상에 보여주지만 background에서 네트워크 요청을 통해 업데이트된다
 // stale query는 다음 경우에 자동으로 refetch된다
 // refetchOnMount - 새로운 query가 mount 되었을 때
 // refetchOnWindowFocus- 윈도우가 refocus 되었을 때
